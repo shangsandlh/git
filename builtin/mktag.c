@@ -3,6 +3,7 @@
 #include "replace-object.h"
 #include "object-store.h"
 #include "fsck.h"
+#include "config.h"
 
 static int mktag_fsck_error_func(struct fsck_options *o,
 				 const struct object_id *oid,
@@ -62,6 +63,7 @@ int cmd_mktag(int argc, const char **argv, const char *prefix)
 	if (argc != 1)
 		usage("git mktag");
 
+	git_config(git_default_config, NULL);
 	if (strbuf_read(&buf, 0, 0) < 0)
 		die_errno("could not read from stdin");
 
